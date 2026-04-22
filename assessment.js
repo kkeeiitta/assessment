@@ -2,7 +2,7 @@
 
 const userNameInput    = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
-const resultDivision   = document.getElementById('result-area');
+const resultDivided   = document.getElementById('result-area');
 const tweetDivision    = document.getElementById('tweet-area');
 
 assessmentButton.onclick = () => {
@@ -11,20 +11,33 @@ assessmentButton.onclick = () => {
     return; // 名前が空の時は関数の処理を終了する。
   }
 
+
   // 診断結果表示エリアの作成
   // 作成の前にタグを空ににする
-  resultDivision.innerText = '';
-  
+  resultDivided.innerText = '';
   // 結果を追加
+  // headerDivided の作成
+  const headerDivided = document.createElement('div'); //h3タグを作る
+  headerDivided.setAttribute('class', 'card-header');
+  headerDivided.innerText = '診断結果'; // 中身の文章を設定
 
-  const header = document.createElement('h3'); //h3タグを作る
-  header.innerText = '診断結果';
-  resultDivision.appendChild(header); // divの子要素として追加
+  //bodyDivided の作成
+  const bodyDivided = document.createElement('div');
+  bodyDivided.setAttribute('class', 'card-body');
 
   const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'card-text');
   const result = assessment(userName); // 診断結果を取得
   paragraph.innerText = result;
-  resultDivision.appendChild(paragraph);
+  bodyDivided.appendChild(paragraph);
+
+  // resultDivided に スタイルを追加
+  resultDivided.setAttribute('class', 'card');
+  resultDivided.setAttribute('style', 'max-width: 700px');
+
+  // headerDividedとbodyDividedをresultDivisionに差し込む
+  resultDivided.appendChild(headerDivided);
+  resultDivided.appendChild(bodyDivided);
 
   // ツイートエリアの作成
   tweetDivision.innerText  = '';
